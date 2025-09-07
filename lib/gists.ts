@@ -39,7 +39,7 @@ export async function readBlob(id: string) {
   if (status !== 200) throw new Error(`Gist read failed: ${status}`);
 
   const files = gist.files ?? {};
-  const entry = Object.values(files)[0] as any | undefined;
+  const entry = Object.values(files)[0] as (typeof files)[0] | undefined;
 
   if (!entry || !entry.raw_url) {
     throw new Error("Unexpected gist shape (no files)");

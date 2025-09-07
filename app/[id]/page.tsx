@@ -4,7 +4,7 @@ import { validateJSON } from "../utils/json";
 
 export default function SharePage({ params }: { params: { id: string } }) {
   const { id } = params;
-  const [doc, setDoc] = useState<any>(null);
+  const [doc, setDoc] = useState<string | null>(null);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(true);
   const isValid = validateJSON(text);

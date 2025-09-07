@@ -13,11 +13,8 @@ export async function GET(
       filename: doc.filename,
       data: doc.data,
     });
-  } catch (e: any) {
-    return NextResponse.json(
-      { error: e.message ?? "read failed" },
-      { status: 500 },
-    );
+  } catch {
+    return NextResponse.json({ error: "read failed" }, { status: 500 });
   }
 }
 
@@ -31,11 +28,8 @@ export async function PUT(
     if (!updated)
       return NextResponse.json({ error: "not found" }, { status: 404 });
     return NextResponse.json({ id: updated.id, filename: updated.filename });
-  } catch (e: any) {
-    return NextResponse.json(
-      { error: e.message ?? "update failed" },
-      { status: 500 },
-    );
+  } catch {
+    return NextResponse.json({ error: "update failed" }, { status: 500 });
   }
 }
 
@@ -47,10 +41,7 @@ export async function DELETE(
     const ok = await deleteBlob(params.id);
     if (!ok) return NextResponse.json({ error: "not found" }, { status: 404 });
     return NextResponse.json({ ok: true });
-  } catch (e: any) {
-    return NextResponse.json(
-      { error: e.message ?? "delete failed" },
-      { status: 500 },
-    );
+  } catch {
+    return NextResponse.json({ error: "delete failed" }, { status: 500 });
   }
 }

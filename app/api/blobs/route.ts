@@ -6,10 +6,7 @@ export async function POST(req: NextRequest) {
     const payload = await req.json();
     const { id, filename } = await createBlob(payload);
     return NextResponse.json({ id, filename }, { status: 201 });
-  } catch (e: any) {
-    return NextResponse.json(
-      { error: e.message ?? "create failed" },
-      { status: 500 },
-    );
+  } catch {
+    return NextResponse.json({ error: "create failed" }, { status: 500 });
   }
 }
